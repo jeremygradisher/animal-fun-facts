@@ -1,4 +1,61 @@
-# Getting Started with Create React App
+# React Tutorial - Animal Fun Facts
+
+## React.js - click on an image and get a fun fact about the animal.
+
+## Most of the code is here:
+```
+import { animals } from './animals';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const title = "";
+
+const showBackground = true;
+
+const background = (<img 
+className="background"
+alt="ocean"
+src="images/ocean.jpeg" />)
+
+const images = [];
+
+const list = [];
+for (const animal in animals) {
+   images.push(
+     <img 
+        key={animal}
+        className='animal'
+        alt={animal}
+        src={animals[animal].image}
+        ariaLabel={animal}
+        role='button'
+        onClick={displayFact}
+     />
+     )
+};
+
+function displayFact(e) {
+  const selectedAnimal = e.target.alt;
+  const animalInfo = animals[selectedAnimal];
+  const optionIndex = Math.floor(Math.random() * animalInfo.facts.length);
+
+  const funFact = animalInfo.facts[optionIndex];
+  document.getElementById('fact').innerHTML = funFact;
+}
+
+const animalFacts = (
+  <div>
+    <h1>{title === "" ? "Click for an animal fun fact" : title}</h1>
+    {showBackground && background}
+    <p id='fact'></p>
+    <div className='animals'>
+      {images}
+    </div>
+  </div>
+    )
+
+ReactDOM.render(animalFacts, document.getElementById('root'));
+```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
