@@ -57,6 +57,8 @@ const animalFacts = (
 ReactDOM.render(animalFacts, document.getElementById('root'));
 ```
 
+## Video tutorial of how to make this app is here: https://www.youtube.com/watch?v=81mybnZPHDg
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
