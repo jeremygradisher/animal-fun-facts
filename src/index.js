@@ -1,17 +1,51 @@
+import { animals } from './animals';
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const title = "";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const showBackground = true;
+
+const background = (<img 
+className="background"
+alt="ocean"
+src="images/ocean.jpeg" />)
+
+const images = [];
+
+const list = [];
+for (const animal in animals) {
+   images.push(
+     <img 
+        key={animal}
+        className='animal'
+        alt={animal}
+        src={animals[animal].image}
+        ariaLabel={animal}
+        role='button'
+        onClick={displayFact}
+     />
+     )
+};
+
+function displayFact(e) {
+  const selectedAnimal = e.target.alt;
+  const animalInfo = animals[selectedAnimal];
+  const optionIndex = Math.floor(Math.random() * animalInfo.facts.length);
+
+  const funFact = animalInfo.facts[optionIndex];
+  document.getElementById('fact').innerHTML = funFact;
+}
+
+const animalFacts = (
+  <div>
+    <h1>{title === "" ? "Click for an animal fun fact" : title}</h1>
+    {showBackground && background}
+    <p id='fact'></p>
+    <div className='animals'>
+      {images}
+    </div>
+  </div>
+    )
+
+ReactDOM.render(animalFacts, document.getElementById('root'));
